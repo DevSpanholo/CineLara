@@ -25,5 +25,5 @@ para a gestão.<br>
 - - - [x] Contas receber
 - - - [x] Contas pagar
 - - - [x] Controle de caixa
-- [ ] Tela de apresentaçao dos filmes em catálogo
-- [ ] Ajustes no front
+- [x] Tela de apresentaçao dos filmes em catálogo
+- [x] Ajustes no front

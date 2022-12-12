@@ -94,6 +94,8 @@ class IndexController extends Controller {
 		return view('selecionar_sessao', compact('sessoes'));
 	}
 
+	
+
 
 	public function index(Conta $contaModel, Parcela $parcelaModel, MovimentacaoCaixa $moviCaixaModel) {
         SEOTools::setTitle('Inicial');

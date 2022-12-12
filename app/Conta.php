@@ -23,6 +23,10 @@ class Conta extends Model {
 	];
 
 	protected $table = 'contas_receber_pagar';
+	
+	public function fornecedor() {
+		return $this->belongsTo(Fornecedor::class );
+	}
 
 	public function setTituloAttribute($value) {
 		if ($value == '' || $value == null) {

@@ -6,18 +6,11 @@
         <div class="row">       
             <div class="col-sm-4">
                 <div class="form-group">
-                    <label for="nome">Nome<i class="text-danger" title="campo obrigatório">*</i></label>
-                    {!! Form::text('nome', null, ['class'=>'form-control']) !!}
+                    <label for="filme_uid">Filme <i class="text-danger" title="Campo obrigatório">*</i></label>
+                    {!! Form::select('filme_uid', ['0'=>'Escolha uma opção'], isset($sessao) ? $sessao->sala_id : null, ['class'=>'select2 form-control select-sala']) !!}
                 </div>
             </div>
-
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <label for="descricao">Descrição<i class="text-danger" title="campo obrigatório">*</i></label>
-                    {!! Form::text('descricao', null, ['class'=>'form-control']) !!}
-                </div>
-            </div>
-        
+            
             <div class="col-sm-4">
                 <div class="form-group">
                     <label for="sala_id">Sala <i class="text-danger" title="Campo obrigatório">*</i></label>
@@ -27,8 +20,15 @@
 
             <div class="col-sm-4">
                 <div class="form-group">
-                    <label for="filme_uid">Filme <i class="text-danger" title="Campo obrigatório">*</i></label>
-                    {!! Form::select('filme_uid', ['0'=>'Escolha uma opção'], isset($sessao) ? $sessao->sala_id : null, ['class'=>'select2 form-control select-sala']) !!}
+                    <label for="nome">Nome<i class="text-danger" title="campo obrigatório">*</i></label>
+                    {!! Form::text('nome', null, ['class'=>'form-control']) !!}
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="descricao">Descrição<i class="text-danger" title="campo obrigatório">*</i></label>
+                    {!! Form::text('descricao', null, ['class'=>'form-control']) !!}
                 </div>
             </div>
 

@@ -1,6 +1,5 @@
 @extends('layouts/app')
 @section('conteudo')
-
     <div class="box">
         <div class="box-header">
             <h3 class="box-title">
@@ -16,12 +15,13 @@
                     <div class="col-sm-12">
                         <table id="dataTable" class="table table-bordered table-striped dataTable" role="grid">
                             <thead>
-                            <tr>
-                                <th width="30%">Nome</th>
-                                <th width="25%">Inicio</th>
-                                <th width="25%">Fim</th>
-                                <th width="20%">Ações</th>
-                            </tr>
+                                <tr>
+                                    <th width="25%">Nome</th>
+                                    <th width="25%">Descricao</th>
+                                    <th width="20%">Inicio</th>
+                                    <th width="20%">Fim</th>
+                                    <th width="10%">Excluir</th>
+                                </tr>
                             </thead>
                         </table>
                     </div>
@@ -32,29 +32,45 @@
     </div>
 
     <script>
-        $(function () {
+        $(function() {
             $('#dataTableSimples').DataTable()
             $('#dataTable').DataTable({
-                'paging'      : true,
+                'paging': true,
                 'lengthChange': true,
-                'searching'   : true,
-                'ordering'    : true,
-                'info'        : true,
-                'autoWidth'   : false,
+                'searching': true,
+                'ordering': true,
+                'info': true,
+                'autoWidth': false,
                 'ajax': {
-                    url: '{{route('sessao.datatable')}}'
+                    url: '{{ route('sessao.datatable') }}'
                 },
-                'columns': [
-                    {data: 'nome', name: 'nome'},
-                    {data: 'inicio', name: 'inicio'},
-                    {data: 'fim', name: 'fim'},
-                    {data: 'action', name: 'Ações', orderable: false, searchable: false}
+                'columns': [{
+                        data: 'nome',
+                        name: 'nome'
+                    },
+                    {
+                        data: 'descricao',
+                        name: 'descricao'
+                    },
+                    {
+                        data: 'inicio',
+                        name: 'inicio'
+                    },
+                    {
+                        data: 'fim',
+                        name: 'fim'
+                    },
+                    {
+                        data: 'action',
+                        name: 'Ações',
+                        orderable: false,
+                        searchable: false
+                    }
                 ],
                 "language": {
-                    "url": '{{asset('js/vendor/datatables/DataTable-pt-BR.json')}}'
+                    "url": '{{ asset('js/vendor/datatables/DataTable-pt-BR.json') }}'
                 }
             })
         })
     </script>
-
 @endsection

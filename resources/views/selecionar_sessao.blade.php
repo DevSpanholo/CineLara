@@ -20,45 +20,78 @@
         <link rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     </head>
+    <header class="main-header">
+
+        <!-- Logo -->
+        <a href="{{ route('index') }}" class="logo">
+            <span class="logo-lg"><b>CineLara </b>CL</span>
+        </a>
+
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+
+                    <li class="dropdown user user-menu">
+                        <a  data-toggle="dropdown" id="user-options"
+                            aria-expanded="false">
+                            <span class="hidden-xs">Bem vindo: {{ Auth::user()->name }}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- User image -->
+                            <li class="user-header">
+                                <p>
+                                    {{ Auth::user()->name }} - Cargo {{ Auth::user()->tipo }}
+                                </p>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    </header>
 
     <body class="hold-transition skin-blue sidebar-mini">
 
         <div class="container">
             <div class="box-header with-border">
                 <h3 class="box-title">Filmes em Cartaz.</h3>
-    
+
                 <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                            class="fa fa-minus"></i></button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                            class="fa fa-remove"></i></button>
                 </div>
             </div>
             @foreach ($sessoes as $sessao)
-            <div class="box-body">
-                <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                    <table class="table table-striped table-bordered table-responsive table-hover tabela-pesquisa">
-                        <thead>
-                            <tr>
-                                <button @click="isOpen = false"
-                                class="flex inline-flex items-center bg-blue-500 text-gray-900 rounded font-semibold px-5 py-4 hover:bg-blue-600 transition ease-in-out duration-150"
-                                style="align-items: flex-end; color: #ffff; background-color: #353238; font: bold; " >
-                                <span class="ml-2">Reservar Lugar</span>
-                            </button>
-                            </tr>
-                        </thead>
-    
-                        <tbody>
-                        <tr>
-                            <td width="65%">Total de entradas</td>
-                            <td width="35%" class="text-right">{{ $sessao['nome'] }}</td>
-                        </tr>
-                        <tr>
-                            <td>{{ $sessao['descricao'] }}</td>
-                            <td class="text-right">{{ $sessao['nome'] }}</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <div class="box-body">
+                    <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <table class="table table-striped table-bordered table-responsive table-hover tabela-pesquisa">
+                            <thead>
+                                <tr>
+                                    <button @click="isOpen = false"
+                                        class="flex inline-flex items-center bg-blue-500 text-gray-900 rounded font-semibold px-5 py-4 hover:bg-blue-600 transition ease-in-out duration-150"
+                                        style="align-items: flex-end; color: #ffff; background-color: #353238; font: bold; ">
+                                        <span class="ml-2">Reservar Lugar</span>
+                                    </button>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td width="55%">Em Cartaz: {{$sessao ['inicio']}}</td>
+                                    <td width="45%" class="text-right">{{ $sessao['nome'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td >{{ $sessao['descricao'] }}</td>
+                                    <td class="text-right">{{ $sessao['nome'] }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
             @endforeach
 
         </div>

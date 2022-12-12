@@ -10,10 +10,10 @@
                     @if (is_null($parcelasP->first()))
                         <p>Nenhuma conta com previsão de vencimento</p>
                     @endif
-                    @foreach ($parcelasP as $parcela)
-                        <p>Fornecedor: {{ $parcela->conta->pessoa->nomeCompleto() }} Vencimento:
+                    {{-- @foreach ($parcelasP as $parcela)
+                        <p>Fornecedor: {{ $parcela->conta->fornecedor->fantasia }} Vencimento:
                             {{ $parcela->data_vencimento }} Valor R$: {{ $parcela->valor }}</p>
-                    @endforeach
+                    @endforeach --}}
                 </div>
                 <div class="icon">
                     HOJE: R$ {{ formatValueForUser($valores['valorPagar']) }}
@@ -33,10 +33,10 @@
                 @if (is_null($parcelasR->first()))
                     <p>Nenhuma conta com previsão de vencimento</p>
                 @endif
-                @foreach ($parcelasR as $parcela)
-                    <p>Cliente: {{ $parcela->conta->pessoa->nomeCompleto() }} Vencimento: {{ $parcela->data_vencimento }}
+                {{-- @foreach ($parcelasR as $parcela)
+                    <p>Cliente: {{ $parcela->conta->user->name }} Vencimento: {{ $parcela->data_vencimento }}
                         Valor R$: {{ $parcela->valor }}</p>
-                @endforeach
+                @endforeach --}}
             </div>
 
             <div class="icon">

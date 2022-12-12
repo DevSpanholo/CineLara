@@ -14,16 +14,37 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-           'id' => 1,  
            'name' => 'Vinicius Spanholo',
-           'email' => 'devspanholo@gmail.com',
+           'email' => 'devspanholo4@gmail.com',
            'password' => Hash::make('123456'),
        ]);
+        
        DB::table('users')->insert([
-        'id' => 2,  
         'name' => 'Vinicius ',
-        'email' => 'vini@gmail.com',
+        'email' => 'vini4@gmail.com',
         'password' => Hash::make('123456'),
-    ]);
+        ]);
+
+        DB::table('fornecedor')->insert([
+            'razao_social' => 'Fornecedor 1',
+		'fantasia' => 'Fornecedor 1',
+		'cnpj' => '123456789',
+		'ie' => '123456789',
+		'ativo' => 1,
+		'fone' => '123456789',
+		'email' => 'teste@gmail.com',
+		'endereco' => 'Rua teste',
+		'cep' => '123456789',
+		'endereco_nro' => '123456789',
+		'bairro' => 'Bairro teste',
+		'complemento' => 'Complemento teste',
+		'cidade' => 'Cidade teste'
+        ]);
+
+
+        DB::table('sala')->insert([
+		'nome' => 'Sala 1',
+		'capacidade' => 32,
+        ]);
     }
 }

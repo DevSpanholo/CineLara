@@ -16,7 +16,14 @@ class Sessao extends Model
         'descricao',
         'inicio',
         'fim',
+        'valor'
     ];
+
+    public function sala()
+    {
+        return $this->belongsTo(Sala::class);
+    }
+
     public function setInicioAttribute($value) {
         $this->attributes['inicio'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
 	}

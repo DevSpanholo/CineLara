@@ -70,7 +70,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
             </nav>
         </header>
-
+    @if(auth()->user()->tipo === 'GERENTE')
         <aside class="main-sidebar">
             <section class="sidebar">
                 <ul class="sidebar-menu" data-widget="tree">
@@ -159,6 +159,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </ul>
             </section>
         </aside>
+        @endif
 
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -238,8 +239,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 Software ERP
             </div>
             <!-- Default to the left -->
-            <strong>Vinicius Ranzolin Spanholo &copy; 2022 <a href="#">E-mail</a>:</strong>
-            160857@@upf.br
+            <strong>CineLara &copy; 2022 <a href="#">E-mail</a>:</strong>
+            160857@@upf.br, 183153@upf.br, 161692@upf.br
         </footer>
     </div>
 

@@ -73,7 +73,7 @@ class MovimentacaoController extends Controller {
 				$parametros['contasReceber'] += $movi->valor_pago;
 			}
 
-			if ($movi->tipo == 'R' && $movi->estornado == 0) {
+			if ($movi->estornado == 0) {
 				$parametros['total'] += $movi->valor_pago;
 			} else {
 				$parametros['total'] -= $movi->valor_pago;

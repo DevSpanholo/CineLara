@@ -4,8 +4,8 @@
     <div class="box">
         <div class="box-header with-border">
             <h3 class="box-title">
-                <a href="{{ route('movimentacao.incluir') }}" class="btn btn-effect-ripple btn-success">
-                    <i class="fa fa-plus"></i> Adicionar movimentação
+                <a href="/auth/register" class="btn btn-effect-ripple btn-success">
+                    <i class="fa fa-plus"></i> Adicionar
                 </a>
             </h3>
 

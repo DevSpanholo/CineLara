@@ -40,7 +40,6 @@ class Parcela extends Model {
 		$query = $this->newQuery();
 		$query->join('contas_receber_pagar as conta', 'conta.id', '=', 'parcelas_receber_pagar.conta_id')
 		      ->where('tipo_operacao', $tipo)
-		      ->where('data_vencimento', '<=', DB::raw("'$dia'"))
 		      ->where('baixada', '0');
 		return $query->with('conta')->get();
 	}
@@ -85,19 +84,11 @@ class Parcela extends Model {
 		}
 	}
 
-	public function setValorPagoAttribute($value) {
+	public function setValorOriginalAttribute($value) {
 		if (substr_count($value, ',') == 0) {
-			return $this->attributes['valor_pago'] = $value;
+			return $this->attributes['valor_original'] = $value;
 		} else {
-			return $this->attributes['valor_pago'] = formatValueForMysql($value);
-		}
-	}
-
-	public function setValorDescontoAttribute($value) {
-		if (substr_count($value, ',') == 0) {
-			return $this->attributes['valor_desconto'] = $value;
-		} else {
-			return $this->attributes['valor_desconto'] = formatValueForMysql($value);
+			return $this->attributes['valor_original'] = formatValueForMysql($value);
 		}
 	}
 

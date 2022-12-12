@@ -111,4 +111,10 @@ class Conta extends Model {
 		}
 	}
 
+	public function getValor($tipo) {
+		return $this->newQuery()
+			->where('contas_receber_pagar.tipo_operacao', $tipo)
+			->get();
+	}
+
 }

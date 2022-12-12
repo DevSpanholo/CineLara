@@ -15,13 +15,14 @@ Auth::routes();
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
-Route::get('/', ['as' => 'index', 'uses' => 'IndexController@index']);
+Route::get('/', ['middleware' => 'validaUser', 'as' => 'index', 'uses' => 'IndexController@index']);
 
 Route::group(['where'                     => ['id'                     => '[0-9]+', 'middleware'                     => 'auth']], function () {
 
-	Route::get('/selecionarsessao', ['as'             => 'selecionar_sessao', 'uses'             => 'IndexController@selecionarSessao']);
+	Route::get('/selecionarsessao', ['as' => 'selecionar_sessao', 'uses' => 'IndexController@selecionarSessao']);
+	Route::get('/vincular/sessao/{id}', ['as' => 'gravar_sessao', 'uses' => 'SessaoController@gravarSessao']);
 	
-	Route::group(['prefix'                    => 'sala'], function () {
+	Route::group(['prefix'                    => 'sala', 'middleware' => 'validaUser'], function () {
 		Route::get('/listar', ['as'             => 'sala.listar', 'uses'             => 'SalaController@listar']);
 		Route::get('/incluir', ['as'            => 'sala.incluir', 'uses'            => 'SalaController@getFormIncluir']);
 		Route::get('/alterar/{id}', ['as'       => 'sala.alterar', 'uses'       => 'SalaController@getFormAlterar']);
@@ -32,7 +33,7 @@ Route::group(['where'                     => ['id'                     => '[0-9]
 		Route::post('/lists/getToSelect', ['as' => 'sala.getSelect', 'uses' => 'SalaController@buscaSala']);
 	});
 
-	Route::group(['prefix'                    => 'fornecedor'], function () {
+	Route::group(['prefix'                    => 'fornecedor', 'middleware' => 'validaUser'], function () {
 		Route::get('/listar', ['as'             => 'fornecedor.listar', 'uses'             => 'FornecedorController@listar']);
 		Route::get('/incluir', ['as'            => 'fornecedor.incluir', 'uses'            => 'FornecedorController@getFormIncluir']);
 		Route::get('/alterar/{id}', ['as'       => 'fornecedor.alterar', 'uses'       => 'FornecedorController@getFormAlterar']);
@@ -43,7 +44,7 @@ Route::group(['where'                     => ['id'                     => '[0-9]
 		Route::get('/listar/datatable', ['as'   => 'fornecedor.datatable', 'uses'   => 'FornecedorController@datatableAjax']);
 	});
 
-	Route::group(['prefix'                    => 'sessao'], function () {
+	Route::group(['prefix'                    => 'sessao', 'middleware' => 'validaUser'], function () {
 		Route::get('/listar', ['as'             => 'sessao.listar', 'uses'             => 'SessaoController@listar']);
 		Route::get('/incluir', ['as'            => 'sessao.incluir', 'uses'            => 'SessaoController@getFormIncluir']);
 		Route::get('/alterar/{id}', ['as'       => 'sessao.alterar', 'uses'       => 'SessaoController@getFormAlterar']);

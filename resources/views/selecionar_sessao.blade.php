@@ -71,11 +71,11 @@
                         <table class="table table-striped table-bordered table-responsive table-hover tabela-pesquisa">
                             <thead>
                                 <tr>
-                                    <button @click="isOpen = false"
+                                    <a href="{{ route('gravar_sessao', ['id' => $sessao['id']]) }}"
                                         class="flex inline-flex items-center bg-blue-500 text-gray-900 rounded font-semibold px-5 py-4 hover:bg-blue-600 transition ease-in-out duration-150"
                                         style="align-items: flex-end; color: #ffff; background-color: #353238; font: bold; ">
                                         <span class="ml-2">Reservar Lugar</span>
-                                    </button>
+                                    </a>
                                 </tr>
                             </thead>
 
@@ -95,17 +95,7 @@
             @endforeach
 
         </div>
-    </body>
-    <footer class="main-footer">
-        <!-- To the right -->
-        <div class="pull-right hidden-xs">
-            Software ERP
-        </div>
-        <!-- Default to the left -->
-        <strong>Vinicius Ranzolin Spanholo &copy; 2022 <a href="#">E-mail</a>:</strong>
-        160857@@upf.br
-    </footer>
-    {{ dd($sessoes) }}
+    
     @if (auth()->user()->tipo == 'GERENTE')
     @endif
 @endsection

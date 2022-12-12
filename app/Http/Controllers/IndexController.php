@@ -89,7 +89,7 @@ class IndexController extends Controller {
 	}
 
 	public function selecionarSessao() {
-        SEOTools::setTitle('SELECE');
+        SEOTools::setTitle('Filmes em Cartaz');
 		$sessoes = Sessao::all();
 		return view('selecionar_sessao', compact('sessoes'));
 	}
@@ -100,22 +100,14 @@ class IndexController extends Controller {
 	public function index(Conta $contaModel, Parcela $parcelaModel, MovimentacaoCaixa $moviCaixaModel) {
         SEOTools::setTitle('Inicial');
 		$dia       = Carbon::now()->addDays(5)->format('Y-m-d');
-		$parcelasR = $parcelaModel->getTotalDia('R', $dia);
-		$parcelasP = $parcelaModel->getTotalDia('P', $dia);
-		$valores   = ['valorReceber' => 0, 'valorPagar' => 0, 'dataBase' => $dia];
-		foreach ($parcelasR as $parcela) {
-			if ($parcela->data_vencimento > Carbon::now()->format('Y-m-d')) {
-				continue;
-			}
-			$valores['valorReceber'] += $parcela['valor'];
-		}
+		$parcelasR = $contaModel->getValor('R');
+		$parcelasP = $contaModel->getValor('P');
 
-		foreach ($parcelasP as $parcela) {
-			if ($parcela->data_vencimento > Carbon::now()->format('Y-m-d')) {
-				continue;
-			}
-			$valores['valorPagar'] += $parcela['valor'];
-		}
+		$valores   = ['valorReceber' => 0, 'valorPagar' => 0, 'dataBase' => $dia];
+		
+		foreach($parcelasR as $pr) $valores['valorReceber'] += $pr['vlr_restante'];
+		foreach($parcelasP as $pr) $valores['valorPagar'] += $pr['vlr_restante'];
+		
 		return view('home', compact('valores', 'parcelasP', 'parcelasR'));
 	}
 

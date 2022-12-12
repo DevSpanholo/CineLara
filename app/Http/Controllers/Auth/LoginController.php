@@ -51,7 +51,7 @@ class LoginController extends Controller
 
         if ($this->attemptLogin($request)) {
 
-            if (auth()->user()->tipo == 'GERENTE') {
+            if (auth()->user()->tipo !== 'GERENTE') {
                 return redirect()->route('selecionar_sessao')->with(['sucesso' => "Sucesso no login"]);
             }
             return $this->sendLoginResponse($request);

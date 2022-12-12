@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Conta;
+use App\Parcela;
+use App\UserSessao;
 use App\Sessao;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
@@ -38,6 +41,50 @@ class SessaoController extends Controller {
 		} catch (\Exception $e) {
 			DB::rollback();
 			return back()->with('erro', 'Erro ao gravar sessão'."\n".$e->getMessage());
+		}
+
+	}
+
+	public function gravarSessao($id) {
+		try {
+			DB::beginTransaction();
+	
+			$sessao = Sessao::find($id);
+
+			UserSessao::create([
+				'user_id' => auth()->user()->id,
+        		'sessao_id' => $id,
+        		'cadeira' => rand(0, $sessao->sala->capacidade)
+			]);
+
+			$conta = Conta::create([
+				'user_id' => auth()->user()->id,
+				'titulo' => rand(0, 100),
+				// 'data_emissao' => date('Y-m-d'),
+				'vlr_total' => $sessao->valor,
+				'vlr_restante' => $sessao->valor,
+				'qtd_parcelas' => 1,
+				'observacao' => 'Sessão de cinema',
+ 				'tipo_operacao' => 'R', // P ou R
+				'qtd_dias' => 30
+			]);
+			
+			Parcela::create([
+				'nro_parcela' => 1,
+				'valor' => $sessao->valor,
+				// 'valor_pago' => 0,
+				'valor_original' =>	$sessao->valor,
+				'data_vencimento' => date('Y-m-d'),
+				'data_recebimento' => null,
+				'baixada' => 0,
+				'conta_id' => $conta->id
+			]);
+
+			DB::commit();
+			return redirect()->route('selecionar_sessao')->with(['sucesso' => "Sucesso ao reservar cadeira"]);
+		} catch (\Exception $e) {
+			DB::rollback();
+			return back()->with('erro', 'Erro ao reservar cadeira'."\n".$e->getMessage());
 		}
 
 	}
